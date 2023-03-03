@@ -1,0 +1,31 @@
+@import '../../styles/mixins.scss';
+
+.header {
+  background-color: var(--color-ui-base);
+  box-shadow: var(--shadow);
+
+  .container {
+    @include container;
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+
+    .wrapper {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      a {
+        font-weight: var(--fw-bold);
+        text-decoration: none;
+        color: var(--color-text);
+        font-size: var(--fm-md);
+      }
+
+      span {
+        margin-left: 0.75rem;
+        text-transform: capitalize;
+      }
+    }
+  }
+}
