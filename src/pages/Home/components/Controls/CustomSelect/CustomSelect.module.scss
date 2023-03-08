@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100%;
+  color: var(--color-text);
+
+  @media (min-width: 767px) {
+    margin-bottom: 0;
+    width: 280px;
+  }
+
+  & > div > div[id] {
+    background-color: var(--color-ui-base);
+  }
+}
