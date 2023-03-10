@@ -12,16 +12,16 @@ export const CountryCard: FC<PropsType> = ({ card }) => {
   const countryData = [
     { label: 'Population', value: card.population },
     { label: 'Region', value: card.region },
-    { label: 'Capital', value: card.capital },
+    { label: 'Capital', value: card.capital[0] },
   ];
 
   return (
     <article className={s.card}>
-      <img src={card.flags.svg} alt={`${card.name} flag`} />
+      <img src={card.flags.svg} alt={card.flags.alt} />
 
       <div className={s.info}>
         <h6 className={s.name}>
-          <b>{card.name}</b>
+          <b>{card.name.common}</b>
         </h6>
 
         {countryData.map(({ label, value }) => (

@@ -1,12 +1,22 @@
 export type CountryCardType = {
-  alpha3Code: string;
-  capital: string;
   flags: {
     png: string;
     svg: string;
+    alt: string;
   };
-  independent: boolean;
-  name: string;
-  population: number;
+  name: {
+    common: string;
+    official: string;
+    nativeName: {
+      fas: {
+        official: string;
+        common: string;
+      };
+    };
+  };
+  capital: string[];
+  cca3: string;
+  altSpellings: string[];
   region: string;
+  population: number;
 };

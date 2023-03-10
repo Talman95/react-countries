@@ -5,13 +5,15 @@ import { CountryCardType } from '../../../../types/CountryCardType';
 import s from './CountriesList.module.scss';
 import { CountryCard } from './CountryCard/CountryCard';
 
-const countries: CountryCardType[] = [];
+type PropsType = {
+  countries: CountryCardType[];
+};
 
-export const CountriesList: FC = () => {
+export const CountriesList: FC<PropsType> = ({ countries }) => {
   return (
     <div className={s.list}>
-      {countries.map(card => (
-        <CountryCard key={card.alpha3Code} card={card} />
+      {countries.map(country => (
+        <CountryCard key={country.cca3} card={country} />
       ))}
     </div>
   );
