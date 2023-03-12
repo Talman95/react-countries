@@ -5,7 +5,6 @@ import { CountryCardType } from '../../types/CountryCardType';
 
 import { Controls } from './components/Controls/Controls';
 import { CountriesList } from './components/CountriesList/CountriesList';
-import s from './Home.module.scss';
 
 export const Home: FC = () => {
   const [countries, setCountries] = useState<CountryCardType[]>([]);
@@ -21,9 +20,9 @@ export const Home: FC = () => {
   }, []);
 
   return (
-    <main className={s.main}>
+    <>
       <Controls />
       <CountriesList countries={countries} />
-    </main>
+    </>
   );
 };

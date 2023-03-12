@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-import { Home } from './pages/Home/Home';
+import { AppRoutes } from './routes/AppRoutes';
 import { Header } from './shared/Header/Header';
 
 export const App: FC = () => {
   return (
     <>
       <Header />
-      <Home />
+      <AppRoutes />
     </>
   );
 };

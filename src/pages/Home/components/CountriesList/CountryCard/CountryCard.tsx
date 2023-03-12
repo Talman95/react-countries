@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { CountryCardType } from '../../../../../types/CountryCardType';
 
 import s from './CountryCard.module.scss';
@@ -9,14 +11,20 @@ type PropsType = {
 };
 
 export const CountryCard: FC<PropsType> = ({ card }) => {
+  const navigate = useNavigate();
+
   const countryData = [
     { label: 'Population', value: card.population },
     { label: 'Region', value: card.region },
     { label: 'Capital', value: card.capital[0] },
   ];
 
+  const onCardClick = (): void => {
+    navigate(`/country/${card.name.common}`);
+  };
+
   return (
-    <article className={s.card}>
+    <article className={s.card} onClick={onCardClick} aria-hidden="true">
       <img src={card.flags.svg} alt={card.flags.alt} />
 
       <div className={s.info}>

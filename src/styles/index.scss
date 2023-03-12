@@ -1,5 +1,6 @@
 @import '~normalize.css';
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap');
+@import './mixins.scss';
 
 *,
 *::after,
@@ -38,4 +39,10 @@ body {
   font-weight: var(--fw-light);
   background: var(--color-bg);
   font-size: var(--fm-sm);
+}
+
+.main {
+  @include container;
+
+  padding: 4rem 2rem;
 }

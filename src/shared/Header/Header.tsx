@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
+import { Link } from 'react-router-dom';
 
 import { Theme } from '../../enums/Theme';
 
@@ -24,7 +25,7 @@ export const Header: FC = () => {
     <header className={s.header}>
       <div className={s.container}>
         <div className={s.wrapper}>
-          <a href="/">Where is the world?</a>
+          <Link to="/">Where is the world?</Link>
         </div>
         <div className={s.wrapper} onClick={onThemeChangeClick} aria-hidden="true">
           {theme === Theme.LIGHT ? <IoMoonOutline size={14} /> : <IoMoon size={14} />}
