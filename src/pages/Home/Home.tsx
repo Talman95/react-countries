@@ -8,6 +8,22 @@ import { CountriesList } from './components/CountriesList/CountriesList';
 
 export const Home: FC = () => {
   const [countries, setCountries] = useState<CountryCardType[]>([]);
+  const [filteredCountries, setFilteredCountries] =
+    useState<CountryCardType[]>(countries);
+
+  const filterCountries = (search: string, region?: string): void => {
+    let filteredData = countries;
+
+    if (search && search.trim() !== '') {
+      filteredData = countries.filter(country => country.name.common.includes(search));
+    }
+
+    if (region) {
+      filteredData = countries.filter(country => country.region === region);
+    }
+
+    setFilteredCountries(filteredData);
+  };
 
   const fetchAllCountries = async (): Promise<void> => {
     const res = await countriesApi.getAllCountries();
@@ -19,10 +35,14 @@ export const Home: FC = () => {
     fetchAllCountries();
   }, []);
 
+  useEffect(() => {
+    setFilteredCountries(countries);
+  }, [countries]);
+
   return (
     <>
-      <Controls />
-      <CountriesList countries={countries} />
+      <Controls filterCountries={filterCountries} />
+      <CountriesList countries={filteredCountries} />
     </>
   );
 };

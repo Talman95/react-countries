@@ -25,7 +25,7 @@ export const CountryCard: FC<PropsType> = ({ card }) => {
 
   return (
     <article className={s.card} onClick={onCardClick} aria-hidden="true">
-      <img src={card.flags.svg} alt={card.flags.alt} />
+      <img src={card.flags.png} alt={card.flags.alt} />
 
       <div className={s.info}>
         <h6 className={s.name}>

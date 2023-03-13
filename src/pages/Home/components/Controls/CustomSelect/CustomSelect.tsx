@@ -31,6 +31,7 @@ export const CustomSelect: FC<PropsType> = ({ value, setValue }) => {
       border: 'none',
       boxShadow: 'var(--shadow)',
       zIndex: '100',
+      cursor: 'pointer',
     }),
     singleValue: (styles: any) => ({
       ...styles,
