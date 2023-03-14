@@ -1,0 +1,18 @@
+.bordersGroup {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+  gap: 1rem;
+  align-items: flex-start;
+
+  @media (min-width: 767px) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .borderTag {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
