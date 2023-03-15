@@ -1,33 +1,48 @@
 import { FC, useEffect, useState } from 'react';
 
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
+import { countriesApi } from '../../../../../api/countriesApi';
 import { Button } from '../../../../../shared/Button/Button';
-import { CountryDetailsType } from '../../../../../types/CountryDetailsType';
 
 import s from './BorderCountryTagGroup.module.scss';
 
 type PropsType = {
-  tagNames: string[];
+  tagNames: string[] | null;
+};
+
+type BorderType = {
+  name: string;
+  alpha3Code: string;
 };
 
 export const BorderCountryTagGroup: FC<PropsType> = ({ tagNames }) => {
-  const [borders, setBorders] = useState<string[]>([]);
+  const [borders, setBorders] = useState<BorderType[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
-  const fetchNeighbours = async (): Promise<void> => {
-    const res = await axios.get<CountryDetailsType[]>(
-      `https://restcountries.com/v2/alpha?codes=${tagNames.join(',')}`,
-    );
+  const fetchNeighbors = async (): Promise<void> => {
+    setIsLoading(true);
 
-    setBorders(res.data.map(country => country.name));
+    if (tagNames) {
+      const codes = tagNames.join(',');
+      const res = await countriesApi.getNeighborsByListCodes(codes);
+
+      const neighborsNames = res.map(({ name, alpha3Code }) => ({
+        name,
+        alpha3Code,
+      }));
+
+      setBorders(neighborsNames);
+    }
+
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    if (tagNames.length > 0) {
-      fetchNeighbours();
+    if (tagNames) {
+      fetchNeighbors();
     }
   }, [tagNames]);
 
@@ -35,23 +50,26 @@ export const BorderCountryTagGroup: FC<PropsType> = ({ tagNames }) => {
     <div className={s.bordersGroup}>
       <p>Border Countries: </p>
 
-      {tagNames.length > 0 ? (
-        <div className={s.borderTag}>
-          {borders.map(name => {
-            const onTagClick = (): void => {
-              navigate(`/country/${name}`);
-            };
+      {isLoading && <span>Loading...</span>}
 
-            return (
-              <Button key={name} onClick={onTagClick}>
-                {name}
-              </Button>
-            );
-          })}
-        </div>
-      ) : (
-        <span>There is no border country</span>
-      )}
+      {!isLoading &&
+        (borders.length > 0 ? (
+          <div className={s.borderTag}>
+            {borders.map(({ name, alpha3Code }) => {
+              const onTagClick = (): void => {
+                navigate(`/country/${alpha3Code}`);
+              };
+
+              return (
+                <Button key={alpha3Code} onClick={onTagClick}>
+                  {name}
+                </Button>
+              );
+            })}
+          </div>
+        ) : (
+          <span>There is no border country</span>
+        ))}
     </div>
   );
 };

@@ -20,7 +20,7 @@ export const CountryCard: FC<PropsType> = ({ card }) => {
   ];
 
   const onCardClick = (): void => {
-    navigate(`/country/${card.name.common}`);
+    navigate(`/country/${card.cca3}`);
   };
 
   return (

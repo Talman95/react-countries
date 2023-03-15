@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from 'react';
 
-import axios from 'axios';
 import { IoArrowBack } from 'react-icons/io5';
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { countriesApi } from '../../api/countriesApi';
 import { Button } from '../../shared/Button/Button';
 import { CountryDetailsType } from '../../types/CountryDetailsType';
 
@@ -14,14 +14,14 @@ export const CountryPage: FC = () => {
 
   const navigate = useNavigate();
 
-  const { name } = useParams();
+  const { code } = useParams();
 
   const fetchCountry = async (): Promise<void> => {
-    const res = await axios.get<CountryDetailsType[]>(
-      `https://restcountries.com/v2/name/${name}`,
-    );
+    if (code) {
+      const res = await countriesApi.getCountryDetailsByCode(code);
 
-    setCountry(res.data[0]);
+      setCountry(res);
+    }
   };
 
   const onBackButtonClick = (): void => {
@@ -30,7 +30,7 @@ export const CountryPage: FC = () => {
 
   useEffect(() => {
     fetchCountry();
-  }, [name]);
+  }, [code]);
 
   if (!country) {
     return <div>Loading...</div>;

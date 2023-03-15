@@ -1,6 +1,7 @@
 export type CountryDetailsType = {
   flag: string;
   name: string;
+  alpha3Code: string;
   nativeName: string;
   population: number;
   region: string;
@@ -9,7 +10,7 @@ export type CountryDetailsType = {
   topLevelDomain: string[];
   currencies: CurrencyType[];
   languages: LanguageType[];
-  borders: string[];
+  borders: string[] | null;
 };
 
 type CurrencyType = {
