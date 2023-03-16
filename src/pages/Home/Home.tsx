@@ -15,11 +15,13 @@ export const Home: FC = () => {
     let filteredData = countries;
 
     if (search && search.trim() !== '') {
-      filteredData = countries.filter(country => country.name.common.includes(search));
+      filteredData = countries.filter(country =>
+        country.name.common.toLowerCase().includes(search.toLowerCase()),
+      );
     }
 
     if (region) {
-      filteredData = countries.filter(country => country.region === region);
+      filteredData = filteredData.filter(country => country.region === region);
     }
 
     setFilteredCountries(filteredData);
