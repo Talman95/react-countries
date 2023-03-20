@@ -1,13 +1,19 @@
 import { FC, useEffect, useState } from 'react';
 
-import { countriesApi } from '../../api/countriesApi';
+import { useSelector } from 'react-redux';
+
+import { useActions } from '../../hooks/useActions';
+import { allCountriesActions, selectAllCountries } from '../../store';
 import { CountryCardType } from '../../types/CountryCardType';
 
 import { Controls } from './components/Controls/Controls';
 import { CountriesList } from './components/CountriesList/CountriesList';
 
 export const Home: FC = () => {
-  const [countries, setCountries] = useState<CountryCardType[]>([]);
+  const countriesActions = useActions(allCountriesActions);
+
+  const countries = useSelector(selectAllCountries);
+
   const [filteredCountries, setFilteredCountries] =
     useState<CountryCardType[]>(countries);
 
@@ -27,14 +33,8 @@ export const Home: FC = () => {
     setFilteredCountries(filteredData);
   };
 
-  const fetchAllCountries = async (): Promise<void> => {
-    const res = await countriesApi.getAllCountries();
-
-    setCountries(res);
-  };
-
   useEffect(() => {
-    fetchAllCountries();
+    countriesActions.getAllCountries();
   }, []);
 
   useEffect(() => {

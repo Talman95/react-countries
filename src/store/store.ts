@@ -1,7 +1,13 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+
+import { countriesReducer } from './slices/countriesSlice';
+
+const rootReducer = combineReducers({
+  countries: countriesReducer,
+});
 
 export const store = configureStore({
-  reducer: {},
+  reducer: rootReducer,
 });
 
 export type RootState = ReturnType<typeof store.getState>;
