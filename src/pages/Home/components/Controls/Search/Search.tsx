@@ -1,17 +1,21 @@
 import { ChangeEvent, FC } from 'react';
 
 import { IoSearch } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
+
+import { useActions } from '../../../../../hooks/useActions';
+import { allFilterActions } from '../../../../../store';
+import { selectSearch } from '../../../../../store/selectors/filterSelectors';
 
 import s from './Search.module.scss';
 
-type PropsType = {
-  search: string;
-  setSearch: (search: string) => void;
-};
+export const Search: FC = () => {
+  const search = useSelector(selectSearch);
 
-export const Search: FC<PropsType> = ({ search, setSearch }) => {
+  const filterActions = useActions(allFilterActions);
+
   const onSearchInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-    setSearch(e.currentTarget.value);
+    filterActions.changeName({ name: e.currentTarget.value });
   };
 
   return (

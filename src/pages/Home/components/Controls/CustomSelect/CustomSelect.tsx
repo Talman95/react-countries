@@ -1,15 +1,14 @@
 import { FC } from 'react';
 
+import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
+import { useActions } from '../../../../../hooks/useActions';
+import { allFilterActions } from '../../../../../store';
+import { selectRegionOption } from '../../../../../store/selectors/filterSelectors';
 import { RegionOptionType } from '../../../../../types/RegionOptionType';
 
 import s from './CustomSelect.module.scss';
-
-type PropsType = {
-  value: RegionOptionType | null;
-  setValue: (value: RegionOptionType | null) => void;
-};
 
 const options: RegionOptionType[] = [
   { value: 'Africa', label: 'Africa' },
@@ -19,36 +18,40 @@ const options: RegionOptionType[] = [
   { value: 'Oceania', label: 'Oceania' },
 ];
 
-export const CustomSelect: FC<PropsType> = ({ value, setValue }) => {
-  const selectStyles = {
-    control: (styles: any) => ({
-      ...styles,
+const selectStyles = {
+  control: (styles: any) => ({
+    ...styles,
 
-      backgroundColor: 'var(--color-ui-base)',
-      borderRadius: 'var(--radius)',
-      padding: '0.25rem',
-      height: '50px',
-      border: 'none',
-      boxShadow: 'var(--shadow)',
-      zIndex: '100',
-      cursor: 'pointer',
-    }),
-    singleValue: (styles: any) => ({
-      ...styles,
+    backgroundColor: 'var(--color-ui-base)',
+    borderRadius: 'var(--radius)',
+    padding: '0.25rem',
+    height: '50px',
+    border: 'none',
+    boxShadow: 'var(--shadow)',
+    zIndex: '100',
+    cursor: 'pointer',
+  }),
+  singleValue: (styles: any) => ({
+    ...styles,
 
-      color: 'var(--color-text)',
-    }),
-    option: (provided: any, state: any) => ({
-      ...provided,
+    color: 'var(--color-text)',
+  }),
+  option: (provided: any, state: any) => ({
+    ...provided,
 
-      cursor: 'pointer',
-      color: 'var(--color-text)',
-      backgroundColor: state.isSelected ? 'var(--color-bg)' : 'var(--color-ui-base)',
-    }),
-  };
+    cursor: 'pointer',
+    color: 'var(--color-text)',
+    backgroundColor: state.isSelected ? 'var(--color-bg)' : 'var(--color-ui-base)',
+  }),
+};
+
+export const CustomSelect: FC = () => {
+  const region = useSelector(selectRegionOption);
+
+  const filterActions = useActions(allFilterActions);
 
   const onChange = (option: RegionOptionType | null): void => {
-    setValue(option);
+    filterActions.changeRegion({ region: option });
   };
 
   return (
@@ -59,7 +62,7 @@ export const CustomSelect: FC<PropsType> = ({ value, setValue }) => {
         placeholder="Filter by region"
         isClearable
         isSearchable={false}
-        value={value}
+        value={region}
         onChange={onChange}
       />
     </div>
