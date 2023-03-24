@@ -1,35 +1,37 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
 import { IoArrowBack } from 'react-icons/io5';
+import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { countriesApi } from '../../api/countriesApi';
+import { useActions } from '../../hooks/useActions';
 import { Button } from '../../shared/Button/Button';
-import { CountryDetailsType } from '../../types/CountryDetailsType';
+import { allCountryInfoActions } from '../../store';
+import { selectCountryInfo } from '../../store/selectors/countryInfoSelectors';
 
 import { InfoCountry } from './components/InfoCountry/InfoCountry';
 
 export const CountryPage: FC = () => {
-  const [country, setCountry] = useState<CountryDetailsType | null>(null);
-
   const navigate = useNavigate();
 
   const { code } = useParams();
 
-  const fetchCountry = async (): Promise<void> => {
-    if (code) {
-      const res = await countriesApi.getCountryDetailsByCode(code);
+  const country = useSelector(selectCountryInfo);
 
-      setCountry(res);
-    }
-  };
+  const countryActions = useActions(allCountryInfoActions);
 
   const onBackButtonClick = (): void => {
     navigate(-1);
   };
 
   useEffect(() => {
-    fetchCountry();
+    if (code) {
+      countryActions.getCountryInfo(code);
+    }
+
+    return () => {
+      countryActions.removeData();
+    };
   }, [code]);
 
   if (!country) {
