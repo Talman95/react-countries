@@ -1,9 +1,15 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect } from 'react';
 
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { countriesApi } from '../../../../../api/countriesApi';
+import { useActions } from '../../../../../hooks/useActions';
 import { Button } from '../../../../../shared/Button/Button';
+import { allCountryInfoActions } from '../../../../../store';
+import {
+  selectBorders,
+  selectBordersLoading,
+} from '../../../../../store/selectors/countryInfoSelectors';
 
 import s from './BorderCountryTagGroup.module.scss';
 
@@ -11,40 +17,25 @@ type PropsType = {
   tagNames: string[] | null;
 };
 
-type BorderType = {
-  name: string;
-  alpha3Code: string;
-};
-
 export const BorderCountryTagGroup: FC<PropsType> = ({ tagNames }) => {
-  const [borders, setBorders] = useState<BorderType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
   const navigate = useNavigate();
 
-  const fetchNeighbors = async (): Promise<void> => {
-    setIsLoading(true);
+  const borders = useSelector(selectBorders);
+  const isLoading = useSelector(selectBordersLoading);
 
-    if (tagNames) {
-      const codes = tagNames.join(',');
-      const res = await countriesApi.getNeighborsByListCodes(codes);
-
-      const neighborsNames = res.map(({ name, alpha3Code }) => ({
-        name,
-        alpha3Code,
-      }));
-
-      setBorders(neighborsNames);
-    }
-
-    setIsLoading(false);
-  };
+  const countryActions = useActions(allCountryInfoActions);
 
   useEffect(() => {
-    if (tagNames) {
-      fetchNeighbors();
+    if (!isLoading) {
+      countryActions.setBordersLoading({ isLoading: true });
     }
-  }, [tagNames]);
+
+    if (tagNames) {
+      countryActions.getNeighboringCountries(tagNames);
+    } else {
+      countryActions.setBordersLoading({ isLoading: false });
+    }
+  }, [countryActions, tagNames]);
 
   return (
     <div className={s.bordersGroup}>
