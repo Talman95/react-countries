@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 
 import { countriesApi } from '../../api/countriesApi';
+import { showErrorUtil } from '../../utils/showErrorUtil';
 
 export const getAllCountries = createAsyncThunk(
   'countries/getAllCountries',
@@ -11,9 +11,7 @@ export const getAllCountries = createAsyncThunk(
 
       return res;
     } catch (e) {
-      const error = e as AxiosError;
-
-      return thunkApi.rejectWithValue(error.message);
+      return showErrorUtil(e, thunkApi);
     }
   },
 );
