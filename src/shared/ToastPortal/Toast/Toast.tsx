@@ -1,10 +1,10 @@
 import { memo, useCallback } from 'react';
 
-import { useActions } from '../../../hooks/useActions';
-import { useAutoCloseToast } from '../../../hooks/useAutoCloseToast';
-import { allToastsActions } from '../../../store';
-
 import s from './Toast.module.scss';
+
+import { useActions } from 'hooks/useActions';
+import { useAutoCloseToast } from 'hooks/useAutoCloseToast';
+import { allToastsActions } from 'store';
 
 type PropsType = {
   id: string;

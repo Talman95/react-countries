@@ -3,15 +3,15 @@ import { FC, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-import { useActions } from '../../../../../hooks/useActions';
-import { Button } from '../../../../../shared/Button/Button';
-import { allCountryInfoActions } from '../../../../../store';
+import s from './BorderCountryTagGroup.module.scss';
+
+import { useActions } from 'hooks/useActions';
+import { Button } from 'shared/Button/Button';
+import { allCountryInfoActions } from 'store';
 import {
   selectBorders,
   selectBordersLoading,
-} from '../../../../../store/selectors/countryInfoSelectors';
-
-import s from './BorderCountryTagGroup.module.scss';
+} from 'store/selectors/countryInfoSelectors';
 
 type PropsType = {
   tagNames: string[] | null;

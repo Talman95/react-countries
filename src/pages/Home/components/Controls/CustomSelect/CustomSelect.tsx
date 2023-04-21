@@ -3,12 +3,12 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import Select from 'react-select';
 
-import { useActions } from '../../../../../hooks/useActions';
-import { allFilterActions } from '../../../../../store';
-import { selectRegionOption } from '../../../../../store/selectors/filterSelectors';
-import { RegionOptionType } from '../../../../../types/RegionOptionType';
-
 import s from './CustomSelect.module.scss';
+
+import { useActions } from 'hooks/useActions';
+import { allFilterActions } from 'store';
+import { selectRegionOption } from 'store/selectors/filterSelectors';
+import { RegionOptionType } from 'types/RegionOptionType';
 
 const options: RegionOptionType[] = [
   { value: 'Africa', label: 'Africa' },

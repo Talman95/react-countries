@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { CountryCardType } from '../../../../types/CountryCardType';
-
 import s from './CountriesList.module.scss';
 import { CountryCard } from './CountryCard/CountryCard';
+
+import { CountryCardType } from 'types/CountryCardType';
 
 type PropsType = {
   countries: CountryCardType[];

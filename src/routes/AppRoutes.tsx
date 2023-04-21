@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { Route, Routes } from 'react-router-dom';
 
-import { Path } from '../enums/Path';
-import { CountryPage } from '../pages/CountryPage/CountryPage';
-import { Home } from '../pages/Home/Home';
+import { Path } from 'enums/Path';
+import { CountryPage } from 'pages/CountryPage/CountryPage';
+import { Home } from 'pages/Home/Home';
 
 export const AppRoutes: FC = () => {
   return (

@@ -1,7 +1,7 @@
-import { CountryCardType } from '../types/CountryCardType';
-import { CountryDetailsType } from '../types/CountryDetailsType';
-
 import { config } from './config';
+
+import { CountryCardType } from 'types/CountryCardType';
+import { CountryDetailsType } from 'types/CountryDetailsType';
 
 export const countriesApi = {
   async getAllCountries(): Promise<CountryCardType[]> {

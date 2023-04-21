@@ -1,4 +1,4 @@
-import { WithNameType } from '../types/CountryDetailsType';
+import { WithNameType } from 'types/CountryDetailsType';
 
 export function mapArrayOfObjects<T>(
   value: string | WithNameType,

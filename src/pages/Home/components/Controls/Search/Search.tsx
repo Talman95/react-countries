@@ -3,11 +3,11 @@ import { ChangeEvent, FC } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 
-import { useActions } from '../../../../../hooks/useActions';
-import { allFilterActions } from '../../../../../store';
-import { selectSearch } from '../../../../../store/selectors/filterSelectors';
-
 import s from './Search.module.scss';
+
+import { useActions } from 'hooks/useActions';
+import { allFilterActions } from 'store';
+import { selectSearch } from 'store/selectors/filterSelectors';
 
 export const Search: FC = () => {
   const search = useSelector(selectSearch);

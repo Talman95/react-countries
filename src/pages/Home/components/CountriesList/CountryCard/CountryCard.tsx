@@ -2,9 +2,9 @@ import { FC } from 'react';
 
 import { useNavigate } from 'react-router-dom';
 
-import { CountryCardType } from '../../../../../types/CountryCardType';
-
 import s from './CountryCard.module.scss';
+
+import { CountryCardType } from 'types/CountryCardType';
 
 type PropsType = {
   card: CountryCardType;

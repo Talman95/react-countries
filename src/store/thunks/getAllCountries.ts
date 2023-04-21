@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { countriesApi } from '../../api/countriesApi';
-import { showErrorUtil } from '../../utils/showErrorUtil';
+import { countriesApi } from 'api/countriesApi';
+import { showErrorUtil } from 'utils/showErrorUtil';
 
 export const getAllCountries = createAsyncThunk(
   'countries/getAllCountries',

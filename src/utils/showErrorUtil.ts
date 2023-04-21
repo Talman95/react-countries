@@ -2,7 +2,7 @@ import { Dispatch } from 'react';
 
 import { AxiosError } from 'axios';
 
-import { allToastsActions } from '../store';
+import { allToastsActions } from 'store';
 
 type DispatchType = Dispatch<ReturnType<typeof allToastsActions.addToast>>;
 

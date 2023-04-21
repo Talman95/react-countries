@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { CountryDetailsType } from '../../../../types/CountryDetailsType';
-import { mapArrayOfObjects } from '../../../../utils/mapArrayOfObjects';
-
 import { BorderCountryTagGroup } from './BorderCountryTagGroup/BorderCountryTagGroup';
 import s from './InfoCountry.module.scss';
+
+import { CountryDetailsType } from 'types/CountryDetailsType';
+import { mapArrayOfObjects } from 'utils/mapArrayOfObjects';
 
 type PropsType = {
   country: CountryDetailsType;

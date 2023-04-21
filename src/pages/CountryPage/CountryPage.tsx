@@ -4,12 +4,12 @@ import { IoArrowBack } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 
-import { useActions } from '../../hooks/useActions';
-import { Button } from '../../shared/Button/Button';
-import { allCountryInfoActions } from '../../store';
-import { selectCountryInfo } from '../../store/selectors/countryInfoSelectors';
-
 import { InfoCountry } from './components/InfoCountry/InfoCountry';
+
+import { useActions } from 'hooks/useActions';
+import { Button } from 'shared/Button/Button';
+import { allCountryInfoActions } from 'store';
+import { selectCountryInfo } from 'store/selectors/countryInfoSelectors';
 
 export const CountryPage: FC = () => {
   const navigate = useNavigate();
