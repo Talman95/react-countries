@@ -3,18 +3,20 @@ import { FC, useEffect, useState } from 'react';
 import { IoMoon, IoMoonOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
 
-import { Theme } from '../../enums/Theme';
-
 import s from './Header.module.scss';
 
+import { Theme } from 'enums/Theme';
+
 export const Header: FC = () => {
-  const [theme, setTheme] = useState(localStorage.getItem('app-theme') || Theme.LIGHT);
+  const [theme, setTheme] = useState(
+    localStorage.getItem('countries-theme') || Theme.LIGHT,
+  );
 
   const onThemeChangeClick = (): void => {
     const newTheme = theme === Theme.LIGHT ? Theme.DARK : Theme.LIGHT;
 
     setTheme(newTheme);
-    localStorage.setItem('app-theme', newTheme);
+    localStorage.setItem('countries-theme', newTheme);
   };
 
   useEffect(() => {

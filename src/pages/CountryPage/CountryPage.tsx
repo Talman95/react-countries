@@ -8,6 +8,7 @@ import { InfoCountry } from './components/InfoCountry/InfoCountry';
 
 import { useActions } from 'hooks/useActions';
 import { Button } from 'shared/Button/Button';
+import { Loader } from 'shared/Loader/Loader';
 import { allCountryInfoActions } from 'store';
 import { selectCountryInfo } from 'store/selectors/countryInfoSelectors';
 
@@ -35,7 +36,7 @@ export const CountryPage: FC = () => {
   }, [code]);
 
   if (!country) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   return (
